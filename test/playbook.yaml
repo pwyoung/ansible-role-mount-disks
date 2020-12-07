@@ -1,0 +1,9 @@
+---
+- name: Show params
+  hosts: all
+  tasks:
+    - debug: msg="test_msg={{ test_msg }}"
+
+- hosts: all
+  roles:
+    - role: test_ansible-role-sanity-check
