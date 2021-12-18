@@ -1,0 +1,21 @@
+sudo mkdir -p /mnt/disks
+sudo chown $USER. /mnt/disks
+
+cd /mnt/disks
+dd if=/dev/zero of=./img1 bs=1GB count=1
+dd if=/dev/zero of=./img2 bs=1GB count=1
+
+sudo losetup -fP /mnt/disks/img1
+sudo losetup -fP /mnt/disks/img2
+
+# Show both devices
+losetup
+
+# For testing (we will not really chown the files yet)
+chown 777 /mnt/disks
+chown 777 /mnt/disks/*
+
+# Cleanup
+sudo losetup -D
+rm -rf /mnt/disks
+
