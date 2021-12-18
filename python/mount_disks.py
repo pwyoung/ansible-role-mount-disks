@@ -13,7 +13,7 @@ def main():
                         default=disk_pattern)
     args = parser.parse_args()
 
-    print("Disk pattern is: " + args.disk_pattern)
+    print("Python Script: Disk pattern is " + args.disk_pattern)
 
 if __name__ == "__main__":
     main()
