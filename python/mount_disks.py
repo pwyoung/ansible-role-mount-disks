@@ -13,7 +13,9 @@ def main():
                         default=disk_pattern)
     args = parser.parse_args()
 
-    print("Python Script: Disk pattern is " + args.disk_pattern)
+    msg = "Python Script: Disk pattern is " + args.disk_pattern
+    print( msg )
+    os.system("ls / > /tmp/mount_disks.py.out")
 
 if __name__ == "__main__":
     main()
