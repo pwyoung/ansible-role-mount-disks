@@ -4,7 +4,7 @@
   debug: msg="This is ansible-role-mount-disks/tasks/main.yml"
 
 - name: Call Python script to mount disks
-  delegate_to: localhost
+  #delegate_to: localhost
   shell: |
     {{ role_path }}/python/mount_disks.py --disk-pattern "{{ disk_pattern }}"
   args:
