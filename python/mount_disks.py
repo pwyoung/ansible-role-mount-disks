@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import argparse
-
+import os
 
 def main():
-    disk_pattern = "Default Test Message in Python Script"
+    disk_pattern = "/dev/nvme_default"
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--disk-pattern',

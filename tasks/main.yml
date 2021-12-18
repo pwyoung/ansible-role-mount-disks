@@ -1,4 +1,8 @@
 ---
+
+- name: Show run status
+  debug: msg="This is ansible-role-mount-disks/tasks/main.yml"
+
 - name: Call Python script to mount disks
   delegate_to: localhost
   shell: |

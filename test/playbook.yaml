@@ -1,4 +1,9 @@
 ---
+- name: Show run status
+  hosts: all
+  tasks:
+    - debug: msg="Inside ansible-role-mount-disks/test/playbook.yaml"
+
 - name: Show params
   hosts: all
   tasks:
@@ -6,4 +11,4 @@
 
 - hosts: all
   roles:
-    - role: test_ansible-role-sanity-check
+    - role: ansible-role-mount-disks
