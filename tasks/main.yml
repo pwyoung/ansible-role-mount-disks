@@ -5,9 +5,9 @@
 
 - name: Call Python script to mount disks
   #delegate_to: localhost
-  shell: |
+  shell: hostname > /tmp/ansible.out
   #  {{ role_path }}/python/mount_disks.py --disk-pattern "{{ disk_pattern }}"
-     hostname > /tmp/ansible.out
+
   args:
     executable: /bin/bash
   register: result
