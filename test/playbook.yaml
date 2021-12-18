@@ -2,7 +2,7 @@
 - name: Show params
   hosts: all
   tasks:
-    - debug: msg="test_msg={{ test_msg }}"
+    - debug: msg="disk_pattern={{ disk_pattern }}"
 
 - hosts: all
   roles:

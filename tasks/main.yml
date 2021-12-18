@@ -1,8 +1,8 @@
 ---
-- name: Run Python script
+- name: Call Python script to mount disks
   delegate_to: localhost
   shell: |
-    {{ role_path }}/python/test_script.py --test-message "{{ test_msg }}"
+    {{ role_path }}/python/mount_disks.py --disk-pattern "{{ disk_pattern }}"
   args:
     executable: /bin/bash
   register: result
