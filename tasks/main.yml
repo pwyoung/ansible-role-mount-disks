@@ -1,11 +1,8 @@
 ---
-- name: Run Python script
-  delegate_to: localhost
-  shell: |
-    {{ role_path }}/python/test_script.py --test-message "{{ test_msg }}"
-  args:
-    executable: /bin/bash
-  register: result
 
-- name: Show result
-  debug: msg="{{ result }}"
+- name: Loop through disks
+  include_tasks: create_partition.yaml
+  loop:
+    "{{ create_partition_data.create_partitions }}"
+  vars:
+    defaults: "{{ create_partition_data.defaults }}"

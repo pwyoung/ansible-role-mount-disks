@@ -1,2 +1,29 @@
 ---
-test_msg: "TEST MESSAGE"
+
+# Call https://github.com/mcgrof/create_partition repeatedly.
+#
+# Use the defaults to fill in any values missing in the calls
+# to create_partition as defined in "create_partitions:" below.
+#
+# The data in create_partitions is simply the configuration as described
+# here https://github.com/mcgrof/create_partition#example-playbook
+create_partition_data:
+  defaults:
+        disk_setup_fstype: "xfs"
+        disk_setup_label: "truncated"
+        disk_setup_fs_opts: "-L truncated"
+        # FOR TESTING, use the local user
+        #disk_setup_user: "vagrant"
+        #disk_setup_group: "vagrant"
+        disk_setup_user: "{{ lookup('env', 'USER') }}"
+        disk_setup_group: "{{ lookup('env', 'USER') }}"
+  create_partitions:
+    - # Specify everything on this call to create_partition
+        disk_setup_device: "/dev/loop0"
+        disk_setup_fstype: "ext2"
+        disk_setup_label: "truncated"
+        disk_setup_fs_opts: "-L truncated"
+        disk_setup_path: "/mnt/disks/disk_1"
+    - # Specify only the things that are not the defaults
+        disk_setup_device: "/dev/loop1"
+        disk_setup_path: "/mnt/disks/disk_2"
