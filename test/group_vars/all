@@ -1,28 +1,29 @@
 ---
 
-# ./defaults/main.yml is not read during testing
-disk_pattern: "/dev/nvme"
-
-test_msg: "override ansible-role-sanity-check message - from ./test/group_vars/all"
-
-# This section should be in a nomaj config file under the yaml path "ansible.extra_vars:"
-# This section role that makes those calls is https://github.com/pwyoung/ansible-role-mount-disks
-ansible_role_mount_disks:
+# Call https://github.com/mcgrof/create_partition repeatedly.
+#
+# Use the defaults to fill in any values missing in the calls
+# to create_partition as defined in "create_partitions:" below.
+#
+# The data in create_partitions is simply the configuration as described
+# here https://github.com/mcgrof/create_partition#example-playbook
+create_partition_data:
   defaults:
         disk_setup_fstype: "xfs"
-        disk_setup_label : "truncated"
-        disk_setup_fs_opts: "-L {{ disk_setup_label }}"
-        disk_setup_user: "vagrant"
-        disk_setup_group: "vagrant"
-  create_partition:
-    - vars: # Specify everything on this call to create_partition
-        disk_setup_device: "/dev/nvme0n1"
+        disk_setup_label: "truncated"
+        disk_setup_fs_opts: "-L truncated"
+        # FOR TESTING, use the local user
+        #disk_setup_user: "vagrant"
+        #disk_setup_group: "vagrant"
+        disk_setup_user: "{{ lookup('env', 'USER') }}"
+        disk_setup_group: "{{ lookup('env', 'USER') }}"
+  create_partitions:
+    - # Specify everything on this call to create_partition
+        disk_setup_device: "/dev/loop0"
         disk_setup_fstype: "ext2"
-        disk_setup_label : "truncated"
-        disk_setup_fs_opts: "-L {{ disk_setup_label }}"
+        disk_setup_label: "truncated"
+        disk_setup_fs_opts: "-L truncated"
         disk_setup_path: "/mnt/disks/disk_1"
-        disk_setup_user: "vagrant"
-        disk_setup_group: "vagrant"
-    - vars: # Specify only the things that are not the defaults
-        disk_setup_device: "/dev/nvme1n1"
+    - # Specify only the things that are not the defaults
+        disk_setup_device: "/dev/loop1"
         disk_setup_path: "/mnt/disks/disk_2"

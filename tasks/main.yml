@@ -1,16 +1,8 @@
 ---
 
-- name: Show run status
-  debug: msg="This is ansible-role-mount-disks/tasks/main.yml"
-
-- name: Call Python script to mount disks
-  #delegate_to: localhost
-  shell: |
-    echo "`date` `hostname` `whoami`" > /tmp/ansible.out
-  #  {{ role_path }}/python/mount_disks.py --disk-pattern "{{ disk_pattern }}"
-  args:
-    executable: /bin/bash
-  register: result
-
-- name: Show result
-  debug: msg="{{ result }}"
+- name: Loop through disks
+  include_tasks: create_partition.yaml
+  loop:
+    "{{ create_partition_data.create_partitions }}"
+  vars:
+    defaults: "{{ create_partition_data.defaults }}"

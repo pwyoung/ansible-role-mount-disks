@@ -1,0 +1,20 @@
+---
+- name: Loop item
+  debug:
+    msg: "item: {{ item }}"
+
+- name: Defaults
+  debug:
+    msg: "defaults: {{ defaults }}"
+
+- name: Create Partition
+  include_role:
+    name: create_partition
+  vars:
+    disk_setup_device: "{{ item.disk_setup_device | default(defaults.disk_setup_device) }}"
+    disk_setup_fstype: "{{ item.disk_setup_fstype | default(defaults.disk_setup_fstype) }}"
+    disk_setup_label : "{{ item.disk_setup_label  | default(defaults.disk_setup_label ) }}"
+    disk_setup_fs_opts: "{{ item.disk_setup_fs_opts | default(defaults.disk_setup_fs_opts) }}"
+    disk_setup_path: "{{ item.disk_setup_path | default(defaults.disk_setup_path) }}"
+    disk_setup_user: "{{ item.disk_setup_user | default(defaults.disk_setup_user) }}"
+    disk_setup_group: "{{ item.disk_setup_group | default(defaults.disk_setup_group) }}"
